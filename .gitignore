@@ -9,8 +9,8 @@ autom4te.cache/
 **/*.a
 **/*.o
 src/main
-/Makefile
-/Makefile.in
+**/Makefile
+**/Makefile.in
 /aclocal.m4
 /config.*
 /configure
@@ -26,3 +26,4 @@ src/main
 .libs/
 *.l[ao]
 *~
+tag
