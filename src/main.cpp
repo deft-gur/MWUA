@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 #include "LPMWUA.h"
 
 
-void solve(std::vector<std::vector<double>> &A, std::vector<double> &b, std::vector<double> &c) {
+std::vector<double> solve(std::vector<std::vector<double>> &A, std::vector<double> &b, std::vector<double> &c) {
   double low = 0, high = 10000;
 
   std::vector<std::vector<double>> outcomes;
@@ -29,19 +30,67 @@ void solve(std::vector<std::vector<double>> &A, std::vector<double> &b, std::vec
   }
   std::transform(res.begin(), res.end(), res.begin(), [&] (double a) -> double { return a/outcomes.size(); } );
 
-  for (auto a : res) {
+  return res;
+}
+
+std::vector<double> matMul(std::vector<std::vector<double>> &A, std::vector<double> &x) {
+  std::vector<double> ret(A.size(), 0);
+  for (int i = 0; i < A.size(); ++i) {
+    for (int j = 0; j < x.size(); ++j) {
+      ret[i] += A[i][j] * x[j];
+    }
+  }
+  return ret;
+}
+
+void printVec(const std::vector<double> &v) {
+  for (auto a : v) {
     std::cout << a << ' ';
   }
   std::cout << '\n';
 }
 
+std::vector<double> vecAdd(const std::vector<double> &a, const std::vector<double> &b) {
+  std::vector<double> v(a.size(), 0);
+  for (int i = 0; i < a.size(); ++i) {
+    v[i] = a[i] + b[i];
+  }
+  return v;
+}
+
+std::vector<double> vecNeg(const std::vector<double> &a) {
+  std::vector<double> v(a.size(), 0);
+  for (int i = 0; i < a.size(); ++i) {
+    v[i] = -a[i];
+  }
+  return v;
+}
 
 int main() {
-  std::vector<std::vector<double>> A = {
-    {1, 2, 3}, {4, 5, 6}
-  };
-  std::vector<double> b = {100, 300};
-  std::vector<double> c = {2, 2, 3};
+  int n = 100, m = 200;
+  std::vector<std::vector<double>> A;
+  std::vector<double> b;
+  A.assign(n, std::vector<double>(m, 0));
+  b.assign(n, 0);
 
-  solve(A, b, c);
+  for (int i = 0; i < n; ++i) {
+    b[i] = rand() % 5000;
+    for (int j = 0; j < m; ++j) {
+      A[i][j] = rand() % 5000;
+    }
+  }
+  std::vector<double> c(m, 0);
+  for (int i = 0; i < m; ++i) {
+    c[i] = (rand() % 3000) + 1;
+  }
+
+  std::vector<double> res = solve(A, b, c);
+
+  for (auto a : res) {
+    std::cout << a << ' ';
+  }
+  std::cout << '\n';
+
+  std::cout << "opt val: " << std::inner_product(res.begin(), res.end(), c.begin(), 0.0) << '\n';
+  printVec(vecAdd(matMul(A, res), vecNeg(b)));
 }

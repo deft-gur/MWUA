@@ -43,7 +43,7 @@ void weights::addWeight(int i, double add) {
 void weights::mulWeight(int i, double reward) {
   sum -= w[i];
   // TODO: 0.1 is the learning rate for now.
-  double eps = 0.1;
+  double eps = 0.01;
   if (reward >= 0) {
     w[i] = w[i] * pow(1.0 + eps, reward/100);
   } else {

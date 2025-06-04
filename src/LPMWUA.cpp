@@ -18,12 +18,12 @@ void LPMWUA::run() {
     double curReward = reward.reward(A, b, Idx, x);
     cumRewards += curReward;
 
-    bool cont = true;
-    for (int i = 0; i < w.size(); ++i) {
-      w.mulWeight(i, reward.reward(A, b, i, x));
-      cont = cont && (w.getWeight(i) > 1e-6);
-    }
-    if (!cont) return;
+    //bool cont = true;
+    //for (int i = 0; i < w.size(); ++i) {
+    //  w.mulWeight(i, reward.reward(A, b, i, x));
+    //  cont = cont && (w.getWeight(i) > 1e-6);
+    //}
+    //if (!cont) return;
   }
 }
 
