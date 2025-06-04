@@ -26,4 +26,5 @@ src/main
 .libs/
 *.l[ao]
 *~
-tag
+tags
+out
