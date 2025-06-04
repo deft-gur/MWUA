@@ -1,0 +1,11 @@
+Quick start instructions
+------------------------
+1.  Build.
+      $> aclocal
+      $> autoconf
+      $> autoheader
+      $> automake --add-missing
+      $> ./configure
+      $> make
+2. Run ./src/main
+
