@@ -38,10 +38,10 @@ void solve(std::vector<std::vector<double>> &A, std::vector<double> &b, std::vec
 
 int main() {
   std::vector<std::vector<double>> A = {
-    {1, 2, 3}, {0, 4, 2}
+    {1, 2, 3}, {4, 5, 6}
   };
-  std::vector<double> b = {5, 6};
-  std::vector<double> c = {1, 2, 1};
+  std::vector<double> b = {100, 300};
+  std::vector<double> c = {2, 2, 3};
 
   solve(A, b, c);
 }
