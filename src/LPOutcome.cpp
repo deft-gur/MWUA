@@ -20,7 +20,6 @@ std::vector<double> LPOutcome::observe(
   for (int i = 0; i < A.size(); ++i) {
     auto f = makeAddOp(i, w);
     std::vector<double> tmp(A[0].size(), 0);
-    std::cout << "weight i " << w.getWeight(i) << std::endl;
     for (int j = 0; j < alpha.size(); ++j) {
       alpha[j] += A[i][j] * w.getWeight(i);
     }
@@ -29,11 +28,6 @@ std::vector<double> LPOutcome::observe(
     beta += b[i] * w.getWeight(i);
   }
 
-  std::cout << "beta" << beta << std::endl;
-  for (auto as : alpha) {
-    std::cout << as << ' ';
-  }
-  std::cout << std::endl;
 
   std::vector<double> ret = oracle.run(c, opt, alpha, beta);
   suc = oracle.getFeasible();
